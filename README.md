@@ -1,4 +1,4 @@
-# ACF-Code-Area Field
+# ACF-Code Area Field
 
 Adds a 'Code Area' textarea editor to the  [Advanced Custom Fields](http://wordpress.org/extend/plugins/advanced-custom-fields/) WordPress plugin.
 
