@@ -19,6 +19,7 @@ Type your Javascript, no ```<script>``` tags needed
 **PHP**
 Type your PHP, no ```<?php ?>``` tags needed (Note, you can not open and close php tags anywhere in your code)
 
+Output all types of code in the usual fashion ```the_field('code_area_field');```
 
 ### Screenshots
 
