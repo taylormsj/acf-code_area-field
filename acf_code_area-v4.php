@@ -77,6 +77,8 @@ class acf_field_code_area extends acf_field
 					'value'	=>	$field['language'],
 					'choices' => array(
 						'css'	=>	__("CSS",'acf'),
+						'sass'	=>	__("SASS",'acf'),
+						'scss'	=>	__("SCSS",'acf'),
 						'javascript'	=>	__("Javascript",'acf'),
 						'htmlmixed'	=>	__("HTML",'acf'),
 						'php'	=>	__("PHP",'acf'),
@@ -147,6 +149,12 @@ class acf_field_code_area extends acf_field
 			case 'css':
 				$language = 'CSS';
 				break;
+			case 'scss':
+				$language = 'SCSS';
+				break;
+			case 'sass':
+				$language = 'SASS';
+				break;
 			case 'javascript':
 				$language = 'Javascript';
 				break;
@@ -197,6 +205,8 @@ class acf_field_code_area extends acf_field
 		wp_register_script( 'acf-input-code_area-code_mirror_js', $this->settings['dir'] . 'js/codemirror.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_js', $this->settings['dir'] . 'js/mode/javascript.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_css', $this->settings['dir'] . 'js/mode/css.js', array('acf-input'), $this->settings['version'] );
+		wp_register_script( 'acf-input-code_area-code_mirror_mode_scss', $this->settings['dir'] . 'js/mode/sass.js', array('acf-input'), $this->settings['version'] );
+		wp_register_script( 'acf-input-code_area-code_mirror_mode_sass', $this->settings['dir'] . 'js/mode/sass.js', array('acf-input'), $this->settings['version'] );
 		wp_register_style( 'acf-input-code_area-code_mirror_css', $this->settings['dir'] . 'css/codemirror.css', array('acf-input'), $this->settings['version'] ); 
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_html', $this->settings['dir'] . 'js/mode/htmlmixed.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_xml', $this->settings['dir'] . 'js/mode/xml.js', array('acf-input'), $this->settings['version'] );
@@ -209,6 +219,8 @@ class acf_field_code_area extends acf_field
 			'acf-input-code_area-code_mirror_js',
 			'acf-input-code_area-code_mirror_mode_js',	
 			'acf-input-code_area-code_mirror_mode_css',
+			'acf-input-code_area-code_mirror_mode_scss',
+			'acf-input-code_area-code_mirror_mode_sass',
 			'acf-input-code_area-code_mirror_mode_html',
 			'acf-input-code_area-code_mirror_mode_xml',
 			'acf-input-code_area-code_mirror_mode_php',
@@ -299,6 +311,12 @@ class acf_field_code_area extends acf_field
 		switch($field["language"]){
 			case 'css':
 				return '<style>'.$value.'</style>';
+				break;
+			case 'scss':
+				return $value;
+				break;
+			case 'sass':
+				return $value;
 				break;
 			case 'javascript':
 				return '<script>'.$value.'</script>';
