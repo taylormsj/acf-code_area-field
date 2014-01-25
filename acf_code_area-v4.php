@@ -162,14 +162,14 @@ class acf_field_code_area extends acf_field
 		echo '<p style="margin-bottom:0;"><small>You are writing '.$language.' code.</small></p>';
   		?>
 
-		<link rel="stylesheet" href="<?php echo $this->settings['dir'];?>/css/theme/<?= $field["theme"];?>.css">
+		<link rel="stylesheet" href="<?php echo $this->settings['dir'];?>/css/theme/<?php echo $field["theme"];?>.css">
 		<script>
 	  		jQuery(document).ready(function($){
-				var editor_<?= str_replace('-', '_', $field['id']);?> = CodeMirror.fromTextArea(document.getElementById('<?= $field['id'];?>'), {
+				var editor_<?php echo str_replace('-', '_', $field['id']);?> = CodeMirror.fromTextArea(document.getElementById('<?php echo $field['id'];?>'), {
 			        lineNumbers: true,
 			        tabmode: 'indent',
-			        mode: '<?= $field["language"];?>',
-			        theme: '<?= $field["theme"];?>'
+			        mode: '<?php echo $field["language"];?>',
+			        theme: '<?php echo $field["theme"];?>'
 			    });
 			});
 	  	</script>
