@@ -5,8 +5,8 @@ class acf_field_code_area extends acf_field
 	// vars
 	var $settings, // will hold info such as dir / path
 		$defaults; // will hold default field options
-		
-		
+
+
 	/*
 	*  __construct
 	*
@@ -15,7 +15,7 @@ class acf_field_code_area extends acf_field
 	*  @since	3.6
 	*  @date	08/06/13
 	*/
-	
+
 	function __construct()
 	{
 		// vars
@@ -23,16 +23,14 @@ class acf_field_code_area extends acf_field
 		$this->label = __('Code Area');
 		$this->category = __("Content",'acf'); // Basic, Content, Choice, etc
 		$this->defaults = array(
-			// add default here to merge into your field. 
-			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
-			//'preview_size' => 'thumbnail'
+			'language' => '',
+			'theme' => ''
 		);
-		
-		
+
 		// do not delete!
     	parent::__construct();
-    	
-    	
+
+
     	// settings
 		$this->settings = array(
 			'path' => apply_filters('acf/helpers/get_path', __FILE__),
@@ -41,8 +39,8 @@ class acf_field_code_area extends acf_field
 		);
 
 	}
-	
-	
+
+
 	/*
 	*  create_options()
 	*
@@ -55,13 +53,13 @@ class acf_field_code_area extends acf_field
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function create_options( $field )
 	{
 
 		// key is needed in the field names to correctly save the data
-		$key = $field['name'];	
-		
+		$key = $field['name'];
+
 		// Create Field Options HTML
 		?>
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
@@ -70,7 +68,7 @@ class acf_field_code_area extends acf_field
 				<p class="description"><?php _e("",'acf'); ?></p>
 			</td>
 			<td>
-				<?php 
+				<?php
 				do_action('acf/create_field', array(
 					'type'	=>	'radio',
 					'name'	=>	'fields['.$key.'][language]',
@@ -85,14 +83,14 @@ class acf_field_code_area extends acf_field
 				?>
 			</td>
 		</tr>
-	
+
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
 				<label><?php _e("Theme",'acf'); ?></label>
 				<p class="description"><?php _e("Set a theme for the editor (<a href=\"http://codemirror.net/demo/theme.html\" target=\"_blank\">Preview Here</a>) ",'acf'); ?></p>
 			</td>
 			<td>
-				<?php 
+				<?php
 				do_action('acf/create_field', array(
 					'type'	=>	'select',
 					'name'	=>	'fields['.$key.'][theme]',
@@ -122,10 +120,10 @@ class acf_field_code_area extends acf_field
 			</td>
 		</tr>
 		<?php
-		
+
 	}
-	
-	
+
+
 	/*
 	*  create_field()
 	*
@@ -137,7 +135,7 @@ class acf_field_code_area extends acf_field
 	*  @since	3.6
 	*  @date	08/06/13
 	*/
-	
+
 	function create_field( $field )
 	{
 		$field['value'] = esc_textarea($field['value']);
@@ -176,8 +174,8 @@ class acf_field_code_area extends acf_field
 
 		<?php
 	}
-	
-	
+
+
 	/*
 	*  input_admin_enqueue_scripts()
 	*
@@ -192,22 +190,22 @@ class acf_field_code_area extends acf_field
 
 	function input_admin_enqueue_scripts()
 	{
-		
+
 		// register acf scripts
 		wp_register_script( 'acf-input-code_area-code_mirror_js', $this->settings['dir'] . 'js/codemirror.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_js', $this->settings['dir'] . 'js/mode/javascript.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_css', $this->settings['dir'] . 'js/mode/css.js', array('acf-input'), $this->settings['version'] );
-		wp_register_style( 'acf-input-code_area-code_mirror_css', $this->settings['dir'] . 'css/codemirror.css', array('acf-input'), $this->settings['version'] ); 
+		wp_register_style( 'acf-input-code_area-code_mirror_css', $this->settings['dir'] . 'css/codemirror.css', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_html', $this->settings['dir'] . 'js/mode/htmlmixed.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_xml', $this->settings['dir'] . 'js/mode/xml.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_php', $this->settings['dir'] . 'js/mode/php.js', array('acf-input'), $this->settings['version'] );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_clike', $this->settings['dir'] . 'js/mode/clike.js', array('acf-input'), $this->settings['version'] );
 
-		
+
 		// scripts
 		wp_enqueue_script(array(
 			'acf-input-code_area-code_mirror_js',
-			'acf-input-code_area-code_mirror_mode_js',	
+			'acf-input-code_area-code_mirror_mode_js',
 			'acf-input-code_area-code_mirror_mode_css',
 			'acf-input-code_area-code_mirror_mode_html',
 			'acf-input-code_area-code_mirror_mode_xml',
@@ -217,12 +215,12 @@ class acf_field_code_area extends acf_field
 
 		// styles
 		wp_enqueue_style(array(
-			'acf-input-code_area-code_mirror_css',	
-		));		
-		
+			'acf-input-code_area-code_mirror_css',
+		));
+
 	}
-	
-	
+
+
 	/*
 	*  input_admin_head()
 	*
@@ -237,10 +235,10 @@ class acf_field_code_area extends acf_field
 
 	function input_admin_head()
 	{
-		
+
 	}
-	
-	
+
+
 	/*
 	*  field_group_admin_enqueue_scripts()
 	*
@@ -255,10 +253,10 @@ class acf_field_code_area extends acf_field
 
 	function field_group_admin_enqueue_scripts()
 	{
-		
+
 	}
 
-	
+
 	/*
 	*  field_group_admin_head()
 	*
@@ -273,10 +271,10 @@ class acf_field_code_area extends acf_field
 
 	function field_group_admin_head()
 	{
-		
+
 	}
-	
-	
+
+
 	/*
 	*  format_value_for_api()
 	*
@@ -292,10 +290,10 @@ class acf_field_code_area extends acf_field
 	*
 	*  @return	$value	- the modified value
 	*/
-	
+
 	function format_value_for_api( $value, $post_id, $field )
 	{
-		
+
 		switch($field["language"]){
 			case 'css':
 				return '<style>'.$value.'</style>';
@@ -316,7 +314,7 @@ class acf_field_code_area extends acf_field
 		return $value;
 
 	}
-		
+
 }
 
 
