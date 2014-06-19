@@ -76,6 +76,7 @@ class acf_field_code_area extends acf_field
 					'name'	=>	'fields['.$key.'][language]',
 					'value'	=>	$field['language'],
 					'choices' => array(
+						'Plain'	=>	__("Plain",'acf'),
 						'css'	=>	__("CSS",'acf'),
 						'javascript'	=>	__("Javascript",'acf'),
 						'htmlmixed'	=>	__("HTML",'acf'),
@@ -144,6 +145,9 @@ class acf_field_code_area extends acf_field
 
 		$language = '';
 		switch($field["language"]){
+			case 'plain':
+				$language = 'Plain'
+				break;
 			case 'css':
 				$language = 'CSS';
 				break;
@@ -297,6 +301,9 @@ class acf_field_code_area extends acf_field
 	{
 		
 		switch($field["language"]){
+			case 'plain':
+				return $value;
+				break;
 			case 'css':
 				return '<style>'.$value.'</style>';
 				break;
