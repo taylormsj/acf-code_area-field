@@ -75,6 +75,7 @@ class acf_field_code_area extends acf_field {
 				'elegant'     => __( "Elegant", 'acf' ),
 				'erlang-dark' => __( "Erlang Dark", 'acf' ),
 				'lesser-dark' => __( "Lesser Dark", 'acf' ),
+				'material'    => __( 'Material', 'acf' ),
 				'midnight'    => __( "Midnight", 'acf' ),
 				'monokai'     => __( "Monokai", 'acf' ),
 				'neat'        => __( "Neat", 'acf' ),
@@ -140,6 +141,8 @@ class acf_field_code_area extends acf_field {
 				var editor_<?php echo str_replace( '-', '_', $field['id'] );?> = CodeMirror.fromTextArea(document.getElementById('<?php echo $field['id'];?>'), {
 					lineNumbers: true,
 					tabmode: 'indent',
+					matchTags: {bothTags: true},
+					extraKeys: {"Ctrl-J": "toMatchingTag"},
 					mode: '<?php echo $field['language'];?>',
 					theme: '<?php echo $field['theme'];?>'
 				});
@@ -166,6 +169,8 @@ class acf_field_code_area extends acf_field {
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_xml', $dir . 'js/mode/xml.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_php', $dir . 'js/mode/php.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_clike', $dir . 'js/mode/clike.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
+		wp_register_script( 'acf-input-code_area-code_xml-fold', $dir . 'js/addon/xml-fold.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
+		wp_register_script( 'acf-input-code_area-code_mirror_addon_matchtags', $dir . 'js/addon/matchtags.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 
 		// scripts
 		wp_enqueue_script( array(
@@ -176,6 +181,8 @@ class acf_field_code_area extends acf_field {
 			'acf-input-code_area-code_mirror_mode_xml',
 			'acf-input-code_area-code_mirror_mode_php',
 			'acf-input-code_area-code_mirror_mode_clike',
+			'acf-input-code_area-code_xml-fold',
+			'acf-input-code_area-code_mirror_addon_matchtags',
 		) );
 
 		// styles
