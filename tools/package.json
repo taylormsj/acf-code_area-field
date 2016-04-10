@@ -1,0 +1,14 @@
+{
+  "name": "acf-code_area-field",
+  "version": "1.1.0",
+  "description": "",
+  "author": "Const Lab",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-concat": "~2.6.0",
+    "gulp-csso": "~1.0.1"
+  }
+}

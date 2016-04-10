@@ -130,25 +130,14 @@ class acf_field_code_area extends acf_field {
 				$language = 'Plain';
 		}
 
-		echo '<textarea id="' . $field['id'] . '" rows="4" class="' . $field['class'] . '" name="' . $field['name'] . '" >' . $field['value'] . '</textarea>';
+		echo '<textarea id="' . $field['id'] . '" rows="4" class="' . $field['class'] . '" name="' . $field['name'] .
+		     '" data-language="' . $field['language'] . '" data-theme="' . $field['theme'] . '">' . $field['value'] . '</textarea>';
 		echo '<p style="margin-bottom:0;"><small>You are writing ' . $language . ' code.</small></p>';
-		?>
 
-		<link rel="stylesheet"
-		      href="<?php echo plugin_dir_url( __FILE__ ) ?>/css/theme/<?php echo $field["theme"]; ?>.css">
-		<script>
-			jQuery(document).ready(function ($) {
-				var editor_<?php echo str_replace( '-', '_', $field['id'] );?> = CodeMirror.fromTextArea(document.getElementById('<?php echo $field['id'];?>'), {
-					lineNumbers: true,
-					tabmode: 'indent',
-					matchTags: {bothTags: true},
-					extraKeys: {"Ctrl-J": "toMatchingTag"},
-					mode: '<?php echo $field['language'];?>',
-					theme: '<?php echo $field['theme'];?>'
-				});
-			});
-		</script>
-		<?php
+		if ( $field['theme'] !== 'default' ): ?>
+			<link rel="stylesheet"
+			      href="<?php echo plugin_dir_url( __FILE__ ) ?>/css/theme/<?php echo $field["theme"] ?>.css">
+		<?php endif;
 	}
 
 	/**
@@ -160,7 +149,19 @@ class acf_field_code_area extends acf_field {
 
 		$dir = plugin_dir_url( __FILE__ );
 
-		// register acf scripts
+		if ( SCRIPT_DEBUG ) {
+			$this->enqueue_full_scripts( $dir );
+		} else {
+			$this->enqueue_prod_scripts( $dir );
+		}
+	}
+
+	/**
+	 * Enqueue not minified scripts
+	 *
+	 * @param $dir
+	 */
+	private function enqueue_full_scripts( $dir ) {
 		wp_register_script( 'acf-input-code_area-code_mirror_js', $dir . 'js/codemirror.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_js', $dir . 'js/mode/javascript.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_css', $dir . 'js/mode/css.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
@@ -171,6 +172,7 @@ class acf_field_code_area extends acf_field {
 		wp_register_script( 'acf-input-code_area-code_mirror_mode_clike', $dir . 'js/mode/clike.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_xml-fold', $dir . 'js/addon/xml-fold.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 		wp_register_script( 'acf-input-code_area-code_mirror_addon_matchtags', $dir . 'js/addon/matchtags.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
+		wp_register_script( 'acf-input-code_area-field', $dir . 'js/acf-code_area.js', array( 'acf-input' ), acf_field_code_area_plugin::$version );
 
 		// scripts
 		wp_enqueue_script( array(
@@ -183,14 +185,26 @@ class acf_field_code_area extends acf_field {
 			'acf-input-code_area-code_mirror_mode_clike',
 			'acf-input-code_area-code_xml-fold',
 			'acf-input-code_area-code_mirror_addon_matchtags',
+			'acf-input-code_area-field'
 		) );
 
 		// styles
 		wp_enqueue_style( array(
 			'acf-input-code_area-code_mirror_css',
 		) );
+	}
 
+	/**
+	 * Enqueue minified scripts
+	 *
+	 * @param $dir
+	 */
+	private function enqueue_prod_scripts( $dir ) {
+		wp_register_script( 'acf-input-code_area-field', $dir . 'js/acf-code_area.min.js', array(), acf_field_code_area_plugin::$version );
+		wp_register_style( 'acf-input-code_area-code_mirror_css', $dir . 'css/codemirror.min.css', array(), acf_field_code_area_plugin::$version );
 
+		wp_enqueue_script( 'acf-input-code_area-field' );
+		wp_enqueue_style( 'acf-input-code_area-code_mirror_css' );
 	}
 
 }
