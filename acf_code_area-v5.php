@@ -89,6 +89,17 @@ class acf_field_code_area extends acf_field {
 			)
 		) );
 
+		acf_render_field_setting( $field, array(
+			'label'        => __( 'Show language info', 'acf' ),
+			'instructions' => '',
+			'type'         => 'radio',
+			'name'         => 'show_info',
+			'choices'      => array(
+				'yes' => __( 'Yes', 'acf' ),
+				'no'  => __( 'No', 'acf' ),
+			)
+		) );
+
 	}
 
 	/*
@@ -132,7 +143,10 @@ class acf_field_code_area extends acf_field {
 
 		echo '<textarea id="' . $field['id'] . '" rows="4" class="' . $field['class'] . '" name="' . $field['name'] .
 		     '" data-language="' . $field['language'] . '" data-theme="' . $field['theme'] . '">' . $field['value'] . '</textarea>';
-		echo '<p style="margin-bottom:0;"><small>You are writing ' . $language . ' code.</small></p>';
+
+		if ( $field['show_info'] === 'yes' ) {
+			echo '<p style="margin-bottom:0;"><small>You are writing ' . $language . ' code.</small></p>';
+		}
 
 		if ( $field['theme'] !== 'default' ): ?>
 			<link rel="stylesheet"
