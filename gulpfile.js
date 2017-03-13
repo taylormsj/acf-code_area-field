@@ -15,20 +15,22 @@ gulp.task('css', function () {
         .pipe(gulp.dest('../css'));
 });
 
-gulp.task('default', ['css'], function () {
+gulp.task('js', function () {
     return gulp.src([
-            '../js/codemirror.js',
-            '../js/mode/javascript.js',
-            '../js/mode/css.js',
-            '../js/mode/htmlmixed.js',
-            '../js/mode/xml.js',
-            '../js/mode/php.js',
-            '../js/mode/clike.js',
-            '../js/addon/xml-fold.js',
-            '../js/addon/matchtags.js',
-            '../js/acf-code_area.js'
-        ])
+        '../js/codemirror.js',
+        '../js/mode/javascript.js',
+        '../js/mode/css.js',
+        '../js/mode/htmlmixed.js',
+        '../js/mode/xml.js',
+        '../js/mode/php.js',
+        '../js/mode/clike.js',
+        '../js/addon/xml-fold.js',
+        '../js/addon/matchtags.js',
+        '../js/acf-code_area.js'
+    ])
         .pipe(uglify())
         .pipe(concat('acf-code_area.min.js'))
         .pipe(gulp.dest('../js'));
 });
+
+gulp.task('default', ['css', 'js']);

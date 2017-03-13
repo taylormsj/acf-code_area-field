@@ -10,11 +10,29 @@
 
         var editor = CodeMirror.fromTextArea($element[0], {
             lineNumbers: true,
+            styleActiveLine: true,
+            autoCloseTags: true,
             tabmode: 'indent',
             matchTags: {bothTags: true},
-            extraKeys: {"Ctrl-J": "toMatchingTag"},
             mode: lang,
-            theme: theme
+            theme: theme,
+            viewportMargin: Infinity,
+            tabSize: 4,
+            indentUnit: 4,
+            indentWithTabs: true,
+            showTrailingSpace: true,
+            lineWrapping: true,
+            extraKeys: {
+                "Ctrl-J": "toMatchingTag",
+                "F11": function (cm) {
+                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                },
+                "Esc": function (cm) {
+                    if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                },
+                "Ctrl-Space": "autocomplete",
+                "Alt-F": "findPersistent"
+            }
         });
 
 
