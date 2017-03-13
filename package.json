@@ -5,10 +5,10 @@
   "author": "Const Lab",
   "license": "MIT",
   "dependencies": {
-    "gulp": "^3.9.0",
-    "gulp-uglify": "^1.2.0",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-concat": "~2.6.0",
-    "gulp-csso": "~1.0.1"
+    "gulp-concat": "~2.6.1",
+    "gulp-csso": "~2.0.0"
   }
 }
