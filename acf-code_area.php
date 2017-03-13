@@ -4,7 +4,7 @@
 Plugin Name: Advanced Custom Fields: Code Area
 Plugin URI: https://github.com/taylormsj/acf-code_area-field
 Description: Adds a 'Code Area' textarea editor to the Advanced Custom Fields WordPress plugin.
-Version: 1.1.0
+Version: 1.1.1
 Author: Taylor Mitchell-St.Joseph
 Author URI: https://taylormitchellstjoseph.co.uk
 License: GPLv2 or later
