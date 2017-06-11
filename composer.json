@@ -1,0 +1,13 @@
+{
+  "name": "constlab/acf-code_area-field",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Kalinichenko",
+      "email": "kalinichenko@constlab.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
