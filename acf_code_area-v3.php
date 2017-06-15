@@ -420,7 +420,7 @@ class acf_field_code_area extends acf_Field
 				return nl2br($value);
 				break;
 			case 'php':
-				return eval($value);
+				return $value;
 				break;
 			default:
 				return $value;

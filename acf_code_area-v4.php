@@ -139,14 +139,14 @@ class acf_field_code_area extends acf_field
 	*  @date	08/06/13
 	*/
 	
-	function create_field( $field )
+		function create_field( $field )
 	{
 		$field['value'] = esc_textarea($field['value']);
 
 		$language = '';
 		switch($field["language"]){
 			case 'plain':
-				$language = 'Plain'
+				$language = 'Plain';
 				break;
 			case 'css':
 				$language = 'CSS';
@@ -314,7 +314,7 @@ class acf_field_code_area extends acf_field
 				return nl2br($value);
 				break;
 			case 'php':
-				return eval($value);
+				return $value;
 				break;
 			default:
 				return $value;
